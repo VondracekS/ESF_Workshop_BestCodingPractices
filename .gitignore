@@ -1,0 +1,9 @@
+# PyCharm files
+.idea
+
+# Python
+quality_check.py
+
+# R Files
+.Rhistory
+.RData

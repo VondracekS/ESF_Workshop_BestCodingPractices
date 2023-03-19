@@ -1,0 +1,27 @@
+---
+title: "Best Coding Practices"
+output: html_notebook
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+# Best Coding Practices Workshop
+*held at the Faculty of Economics of the Masaryk University on 19.03.2023*
+
+Please be informed I didn't solve some issues regarding the running of bash
+scripts in this R Notebook. To complete the tasks, please run the Colab notebook
+[here](https://github.com/VondracekS/ESF_Workshop_BestCodingPractices).
+
+```{r, engine = 'bash'}
+pwd
+```
+
+
+```{r, engine = 'bash'}
+ls
+```
+```{r, engine = 'bash'}
+cd data
+ls
+```
