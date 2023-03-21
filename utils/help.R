@@ -1,106 +1,88 @@
+library(readr)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
 read_csv <- function(path) {
-  csv_dict <- list()
+  # Loads all .csv files present in path into a list
+  csv_list <- list()
   files <- list.files(path)
-  
   for (file in files) {
-    name_parts <- strsplit(file, "\\.")[[1]]
-    prefix <- name_parts[1]
-    suffix <- name_parts[2]
-    
-    if (suffix == "csv") {
-      csv_dict[prefix] <- read.csv(file.path(path, file))
+    if (grepl("\\.csv$", file)) {
+      prefix <- sub("\\.csv$", "", file)
+      csv_list[[prefix]] <- read_csv(file.path(path, file))
     }
   }
-  
-  return(csv_dict)
+  return(csv_list)
 }
 
 read_csv_v2 <- function(path) {
-  csv_dict <- list()
+  # Just like read_csv but removes padding
+  csv_list <- list()
   files <- list.files(path)
-  
   for (file in files) {
-    name_parts <- strsplit(file, "\\.")[[1]]
-    prefix <- name_parts[1]
-    suffix <- name_parts[2]
-    
-    if (suffix == "csv") {
-      csv_dict[as.character(as.integer(prefix))] <- read.csv(file.path(path, file))
+    if (grepl("\\.csv$", file)) {
+      prefix <- sub("\\.csv$", "", file)
+      csv_list[[as.numeric(prefix)]] <- read_csv(file.path(path, file))
     }
   }
-  
-  return(csv_dict)
-}
-
-read_csv_v3 <- function(path) {
-  csv_dict <- list()
-  files <- list.files(path)
-  
-  for (file in files) {
-    name_parts <- strsplit(file, "\\.")[[1]]
-    prefix <- name_parts[1]
-    suffix <- name_parts[2]
-    
-    if (suffix == "csv") {
-      csv_dict[remove_padding(prefix)] <- read.csv(file.path(path, file))
-    }
-  }
-  
-  return(csv_dict)
-}
-
-read_csv_v4 <- function(path, file_subset=NULL) {
-  csv_dict <- list()
-  files <- list.files(path)
-  
-  for (file in files) {
-    name_parts <- strsplit(file, "\\.")[[1]]
-    prefix <- name_parts[1]
-    suffix <- name_parts[2]
-    
-    if (suffix == "csv") {
-      if (is.null(file_subset) || file %in% file_subset) {
-        csv_dict[remove_padding(prefix)] <- read.csv(file.path(path, file))
-      }
-    }
-  }
-  
-  return(csv_dict)
-}
-
-test_read_csv <- function(path) {
-  dict_full <- read_csv(path)
-  assertthat::assert_that(length(dict_full) == length(list.files(path, pattern = "\\.csv$")))
-  print(paste0("Tests passed for the test_read_csv(", path, ")"))
+  return(csv_list)
 }
 
 remove_padding <- function(tgt_string) {
-  str_out <- as.character(as.integer(tgt_string))
+  # Removes the padding from the file
+  str_out <- as.numeric(tgt_string)
   return(str_out)
 }
 
-test_remove_padding <- function(test_cases=c('0125', '1250')) {
-  assertthat::assert_that(remove_padding(test_cases[1]) == '125')
-  print(paste0("remove_padding(", test_cases[1], ") -> ", remove_padding(test_cases[1]), " Test OK"))
-  assertthat::assert_that(remove_padding(test_cases[2]) == '1250')
-  print(paste0("remove_padding(", test_cases[2], ") -> ", remove_padding(test_cases[2]), " Test OK"))
+read_csv_v3 <- function(path) {
+  # Removes padding using another function
+  csv_list <- list()
+  files <- list.files(path)
+  for (file in files) {
+    if (grepl("\\.csv$", file)) {
+      prefix <- sub("\\.csv$", "", file)
+      csv_list[[remove_padding(prefix)]] <- read_csv(file.path(path, file))
+    }
+  }
+  return(csv_list)
 }
 
-get_minmax_date <- function(df) {
-  df$Date <- as.Date(df$Date)
-  min_d <- min(df$Date)
-  max_d <- max(df$Date)
-  
-  df_out <- data.frame(id = df$ID[1],
-                       min_d = min_d,
-                       max_d = max_d,
-                       days_diff = as.integer(max_d - min_d))
-  return(df_out)
+read_csv_v4 <- function(path, id_list=NULL) {
+  # Makes it possible to load only a subset of the data
+  csv_list <- list()
+  files_listed <- paste(sprintf("%03d", id_list), ".csv", sep="")
+  files <- list.files(path)
+  for (file in files) {
+    if (grepl("\\.csv$", file)) {
+      if (is.null(id_list) | file %in% files_listed) {
+        prefix <- sub("\\.csv$", "", file)
+        csv_list[[remove_padding(prefix)]] <- read_csv(file.path(path, file))
+      }
+    }
+  }
+  return(csv_list)
 }
 
-# concat_date_ranges <- function(dfs_all, subset=NULL) {
-#   date_ranges <- list()
-#   
-#   for (k in names(dfs_all)) {
-#     if (is.null(subset) || k %in% subset) {
-#       date_ranges[[k]] <- get_minmax
+plot_monitoring_station <- function(df, id_vars=c("Date", "ID"), value_vars=c("sulfate", "nitrate")) {
+  # Plots the monitoring station data
+  data_plotted <- pivot_longer(df, cols=value_vars, names_to="variable", values_to="value")
+  g <- ggplot(data_plotted, aes(x=Date, y=value, color=variable)) +
+       geom_line() +
+       facet_wrap(~ ID, ncol=2) +
+       theme(legend.position="bottom")
+  print(g)
+}
+
+get_monitor <- function(station_ids, dropna=TRUE, plot=TRUE) {
+  # Returns the monitoring station data for a list of station IDs
+  stations_data <- read_csv_v4("./specdata", station_ids)
+  stations_data <- bind_rows(stations_data)
+  if (dropna) {
+    stations_data <- stations_data %>% drop_na()
+  }
+  if (plot) {
+    plot_monitoring_station(stations_data)
+  }
+  return(stations_data)
+}

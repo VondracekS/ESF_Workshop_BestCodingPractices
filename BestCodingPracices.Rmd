@@ -6,7 +6,6 @@ editor_options:
     wrap: 72
 ---
 
-# Best Coding Practices Workshop
 *held at the Faculty of Economics of the Masaryk University on 19.03.2023*
 
 Please be informed I didn't solve some issues regarding the running of bash
@@ -14,18 +13,135 @@ scripts in this R Notebook. To complete the first set of tasks, please run the
 Colab notebook [here](https://github.com/VondracekS/ESF_Workshop_BestCodingPractices).
 
 
-# 2 Coding
+# R Coding part
 
 In this part, you'll get an opportunity to try some of the concepts we've covered during presentation.
 
 ```{r}
 getwd()
 ```
+In this section, you will perform the following tasks:  
 
-## 2.1 Loading data
+- iteratively search through a directory and subsequently load the data
+- test of the loaded data
+- using a modular design, you will separate functionalities into operation-specific functions
 
-In this section, you will be complete te following tasks:
-- iteratively searching through a directory and subsequently loading data
-- testing of the loaded data
-- separate functionalities into operation-specific functions
+
+
+```{r}
+# TODO: Create a function that:
+# - loads all the .csv files from the directory 
+# - stores them in a dictionary;
+# - add some explanatory docstring
+#
+# hints: os.listdir, string.split, make sure you read only csv files, 
+# btw: is the function name the best possible one? change this eventually
+
+read_csv <- function(path){
+  csv_list = list()
+  return(NULL)
+}
+
+```
+
+Please feel free to test your function:
+
+```{r}
+test_read_csv <- function(path) {
+  # Test for the read.csv method
+  dict_full <- read_csv(path)
+  assertthat::assert_that(length(dict_full) == length(list.files(path, pattern = ".csv")))
+  cat(sprintf("Tests passed for the test_read_csv(%s)\n", path))
+}
+```
+
+
+
+OK, now you have the function. However, some improvements are still possible.
+PLease finish the following tasks:  
+
+- adjust the fuction to ignore the "0" padding for all numbers smaller than 100 
+(e.g. "050" will be replaced by "50" and so on) -> read_csv_v2()
+- separate the padding removal to another function -> remove_padding()
+- write a test for the padding removal
+- use the remove_padding() function within the read_csv_v3
+- extend the function to be able to specify only particular .csv files to be read (and if not specified, just load all) -> read_csv_v4()
+
+Again, please find more suitable names for all the variables
+
+
+```{r}
+# TODO: ignore the padding within the function
+# hint: did you know that "011" integer will be read as "11"?
+
+read_csv_v2 <- function(path){
+  csv_list = list()
+  return(NULL)
+}
+```
+
+
+```{r}
+# TODO: separating the padding removal function
+
+remove_padding <- function(tgt_str){
+  return(NULL)
+}
+```
+
+```{r}
+test_remove_padding <- function(test_cases=c('0125', '1250')) {
+  assertthat::assert_that(remove_padding(test_cases[1]) == '125')
+  cat(sprintf("remove_padding(%s) -> %s Test OK\n", test_cases[1], remove_padding(test_cases[1])))
+  assertthat::assert_that(remove_padding(test_cases[2]) == '1250')
+  cat(sprintf("remove_padding(%s) -> %s Test OK\n", test_cases[2], remove_padding(test_cases[2])))
+}
+```
+
+
+
+```{r}
+# TODO: adjust the former function so that you use the padding removal
+read_csv_v3 <- function(path){
+  csv_list = list()
+  return(NULL)
+}
+```
+
+
+```{r}
+
+read_csv_v4 <- function(path){
+  csv_list = list()
+  return(NULL)
+}
+
+```
+
+In the last part, create a new function, called get_monitor()
+This function will do the following:  
+
+- load the specific monitoring stations
+- concatenate all data frames from the dictionary
+- if dropna, the function will drop all na values for all loaded tables
+- if print_stats, the function will print descriptive stats for all the data frames
+- if plot, the function will plot all variables in a single plot (
+  i.e. Date will be on the x axis, concentration on the y axis, ID will be in the plot title
+
+
+```{r}
+# TODO: get_monitor function
+# Hints: 
+# -separate functionalities (loading the data and plotting the data)
+# -use already defined function that loads the csv data
+
+get_monitor <- function(station_ids, dropna=TRUE, plot=TRUE) {
+  stations_data <- NULL
+  if (dropna) {return(NULL)}
+  if (plot) {return(NULL)}
+  return(stations_data)
+}
+```
+
+
 

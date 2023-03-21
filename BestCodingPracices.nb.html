@@ -1768,36 +1768,166 @@ pre code {
 
 
 <!-- rnb-text-begin -->
-<div id="best-coding-practices-workshop" class="section level1">
-<h1>Best Coding Practices Workshop</h1>
 <p><em>held at the Faculty of Economics of the Masaryk University on
 19.03.2023</em></p>
 <p>Please be informed I didn’t solve some issues regarding the running
 of bash scripts in this R Notebook. To complete the first set of tasks,
 please run the Colab notebook <a href="https://github.com/VondracekS/ESF_Workshop_BestCodingPractices">here</a>.</p>
-</div>
-<div id="coding" class="section level1">
-<h1>2 Coding</h1>
+<div id="r-coding-part" class="section level1">
+<h1>R Coding part</h1>
 <p>In this part, you’ll get an opportunity to try some of the concepts
 we’ve covered during presentation.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2V0d2QoKVxuYGBgIn0= -->
-<pre class="r"><code>getwd()</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2V0d2QoKVxuXG5gYGAifQ== -->
+<pre class="r"><code>getwd()
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiQzovVXNlcnMvQTIwMDA4MzI4My9PbmVEcml2ZSAtIERldXRzY2hlIFRlbGVrb20gQUcvbm9uX0RUL0VTRl9Xb3Jrc2hvcF9CZXN0Q29kaW5nUHJhY3RpY2VzXCJcbiJ9 -->
+<pre><code>[1] &quot;C:/Users/A200083283/OneDrive - Deutsche Telekom AG/non_DT/ESF_Workshop_BestCodingPractices&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>In this section, you will perform the following tasks:</p>
+<ul>
+<li>iteratively search through a directory and subsequently load the
+data</li>
+<li>test of the loaded data</li>
+<li>using a modular design, you will separate functionalities into
+operation-specific functions</li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBUT0RPOiBDcmVhdGUgYSBmdW5jdGlvbiB0aGF0OlxuIyAtIGxvYWRzIGFsbCB0aGUgLmNzdiBmaWxlcyBmcm9tIHRoZSBkaXJlY3RvcnkgXG4jIC0gc3RvcmVzIHRoZW0gaW4gYSBkaWN0aW9uYXJ5O1xuIyAtIGFkZCBzb21lIGV4cGxhbmF0b3J5IGRvY3N0cmluZ1xuI1xuIyBoaW50czogb3MubGlzdGRpciwgc3RyaW5nLnNwbGl0LCBtYWtlIHN1cmUgeW91IHJlYWQgb25seSBjc3YgZmlsZXMsIFxuIyBidHc6IGlzIHRoZSBmdW5jdGlvbiBuYW1lIHRoZSBiZXN0IHBvc3NpYmxlIG9uZT8gY2hhbmdlIHRoaXMgZXZlbnR1YWxseVxuXG5yZWFkX2NzdiA8LSBmdW5jdGlvbihwYXRoKXtcbiAgY3N2X2xpc3QgPSBsaXN0KClcbiAgcmV0dXJuKE5VTEwpXG59XG5cbmBgYCJ9 -->
+<pre class="r"><code># TODO: Create a function that:
+# - loads all the .csv files from the directory 
+# - stores them in a dictionary;
+# - add some explanatory docstring
+#
+# hints: os.listdir, string.split, make sure you read only csv files, 
+# btw: is the function name the best possible one? change this eventually
+
+read_csv &lt;- function(path){
+  csv_list = list()
+  return(NULL)
+}
+</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<div id="loading-data" class="section level2">
-<h2>2.1 Loading data</h2>
-<p>In this section, you will be complete te following tasks: -
-iteratively searching through a directory and subsequently loading data
-- testing of the loaded data - separate functionalities into
-operation-specific functions</p>
+<p>Please feel free to test your function:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>OK, now you have the function. However, some improvements are still
+possible. PLease finish the following tasks:</p>
+<ul>
+<li>adjust the fuction to ignore the “0” padding for all numbers smaller
+than 100 (e.g. “050” will be replaced by “50” and so on) -&gt;
+read_csv_v2()</li>
+<li>separate the padding removal to another function -&gt;
+remove_padding()</li>
+<li>write a test for the padding removal</li>
+<li>use the remove_padding() function within the read_csv_v3</li>
+<li>extend the function to be able to specify only particular .csv files
+to be read (and if not specified, just load all) -&gt;
+read_csv_v4()</li>
+</ul>
+<p>Again, please find more suitable names for all the variables</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBUT0RPOiBpZ25vcmUgdGhlIHBhZGRpbmcgd2l0aGluIHRoZSBmdW5jdGlvblxuIyBoaW50OiBkaWQgeW91IGtub3cgdGhhdCBcIjAxMVwiIGludGVnZXIgd2lsbCBiZSByZWFkIGFzIFwiMTFcIj9cblxucmVhZF9jc3ZfdjIgPC0gZnVuY3Rpb24ocGF0aCl7XG4gIGNzdl9saXN0ID0gbGlzdCgpXG4gIHJldHVybihOVUxMKVxufVxuYGBgIn0= -->
+<pre class="r"><code># TODO: ignore the padding within the function
+# hint: did you know that &quot;011&quot; integer will be read as &quot;11&quot;?
+
+read_csv_v2 &lt;- function(path){
+  csv_list = list()
+  return(NULL)
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBUT0RPOiBzZXBhcmF0aW5nIHRoZSBwYWRkaW5nIHJlbW92YWwgZnVuY3Rpb25cblxucmVtb3ZlX3BhZGRpbmcgPC0gZnVuY3Rpb24odGd0X3N0cil7XG4gIHJldHVybihOVUxMKVxufVxuYGBgIn0= -->
+<pre class="r"><code># TODO: separating the padding removal function
+
+remove_padding &lt;- function(tgt_str){
+  return(NULL)
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdF9yZW1vdmVfcGFkZGluZyA8LSBmdW5jdGlvbih0ZXN0X2Nhc2VzPWMoJzAxMjUnLCAnMTI1MCcpKSB7XG4gIGFzc2VydHRoYXQ6OmFzc2VydF90aGF0KHJlbW92ZV9wYWRkaW5nKHRlc3RfY2FzZXNbMV0pID09ICcxMjUnKVxuICBjYXQoc3ByaW50ZihcInJlbW92ZV9wYWRkaW5nKCVzKSAtPiAlcyBUZXN0IE9LXFxuXCIsIHRlc3RfY2FzZXNbMV0sIHJlbW92ZV9wYWRkaW5nKHRlc3RfY2FzZXNbMV0pKSlcbiAgYXNzZXJ0dGhhdDo6YXNzZXJ0X3RoYXQocmVtb3ZlX3BhZGRpbmcodGVzdF9jYXNlc1syXSkgPT0gJzEyNTAnKVxuICBjYXQoc3ByaW50ZihcInJlbW92ZV9wYWRkaW5nKCVzKSAtPiAlcyBUZXN0IE9LXFxuXCIsIHRlc3RfY2FzZXNbMl0sIHJlbW92ZV9wYWRkaW5nKHRlc3RfY2FzZXNbMl0pKSlcbn1cbmBgYCJ9 -->
+<pre class="r"><code>test_remove_padding &lt;- function(test_cases=c(&#39;0125&#39;, &#39;1250&#39;)) {
+  assertthat::assert_that(remove_padding(test_cases[1]) == &#39;125&#39;)
+  cat(sprintf(&quot;remove_padding(%s) -&gt; %s Test OK\n&quot;, test_cases[1], remove_padding(test_cases[1])))
+  assertthat::assert_that(remove_padding(test_cases[2]) == &#39;1250&#39;)
+  cat(sprintf(&quot;remove_padding(%s) -&gt; %s Test OK\n&quot;, test_cases[2], remove_padding(test_cases[2])))
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBUT0RPOiBhZGp1c3QgdGhlIGZvcm1lciBmdW5jdGlvbiBzbyB0aGF0IHlvdSB1c2UgdGhlIHBhZGRpbmcgcmVtb3ZhbFxucmVhZF9jc3ZfdjMgPC0gZnVuY3Rpb24ocGF0aCl7XG4gIGNzdl9saXN0ID0gbGlzdCgpXG4gIHJldHVybihOVUxMKVxufVxuYGBgIn0= -->
+<pre class="r"><code># TODO: adjust the former function so that you use the padding removal
+read_csv_v3 &lt;- function(path){
+  csv_list = list()
+  return(NULL)
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5yZWFkX2Nzdl92NCA8LSBmdW5jdGlvbihwYXRoKXtcbiAgY3N2X2xpc3QgPSBsaXN0KClcbiAgcmV0dXJuKE5VTEwpXG59XG5cbmBgYCJ9 -->
+<pre class="r"><code>
+read_csv_v4 &lt;- function(path){
+  csv_list = list()
+  return(NULL)
+}
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>In the last part, create a new function, called get_monitor() This
+function will do the following:</p>
+<ul>
+<li>load the specific monitoring stations</li>
+<li>concatenate all data frames from the dictionary</li>
+<li>if dropna, the function will drop all na values for all loaded
+tables</li>
+<li>if print_stats, the function will print descriptive stats for all
+the data frames</li>
+<li>if plot, the function will plot all variables in a single plot (
+i.e. Date will be on the x axis, concentration on the y axis, ID will be
+in the plot title</li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBUT0RPOiBnZXRfbW9uaXRvciBmdW5jdGlvblxuIyBIaW50czogXG4jIC1zZXBhcmF0ZSBmdW5jdGlvbmFsaXRpZXMgKGxvYWRpbmcgdGhlIGRhdGEgYW5kIHBsb3R0aW5nIHRoZSBkYXRhKVxuIyAtdXNlIGFscmVhZHkgZGVmaW5lZCBmdW5jdGlvbiB0aGF0IGxvYWRzIHRoZSBjc3YgZGF0YVxuXG5nZXRfbW9uaXRvciA8LSBmdW5jdGlvbihzdGF0aW9uX2lkcywgZHJvcG5hPVRSVUUsIHBsb3Q9VFJVRSkge1xuICBzdGF0aW9uc19kYXRhIDwtIE5VTExcbiAgaWYgKGRyb3BuYSkge3JldHVybihOVUxMKX1cbiAgaWYgKHBsb3QpIHtyZXR1cm4oTlVMTCl9XG4gIHJldHVybihzdGF0aW9uc19kYXRhKVxufVxuYGBgIn0= -->
+<pre class="r"><code># TODO: get_monitor function
+# Hints: 
+# -separate functionalities (loading the data and plotting the data)
+# -use already defined function that loads the csv data
+
+get_monitor &lt;- function(station_ids, dropna=TRUE, plot=TRUE) {
+  stations_data &lt;- NULL
+  if (dropna) {return(NULL)}
+  if (plot) {return(NULL)}
+  return(stations_data)
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 </div>
-</div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkJlc3QgQ29kaW5nIFByYWN0aWNlcyINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KZWRpdG9yX29wdGlvbnM6IA0KICBtYXJrZG93bjogDQogICAgd3JhcDogNzINCi0tLQ0KDQojIEJlc3QgQ29kaW5nIFByYWN0aWNlcyBXb3Jrc2hvcA0KKmhlbGQgYXQgdGhlIEZhY3VsdHkgb2YgRWNvbm9taWNzIG9mIHRoZSBNYXNhcnlrIFVuaXZlcnNpdHkgb24gMTkuMDMuMjAyMyoNCg0KUGxlYXNlIGJlIGluZm9ybWVkIEkgZGlkbid0IHNvbHZlIHNvbWUgaXNzdWVzIHJlZ2FyZGluZyB0aGUgcnVubmluZyBvZiBiYXNoDQpzY3JpcHRzIGluIHRoaXMgUiBOb3RlYm9vay4gVG8gY29tcGxldGUgdGhlIGZpcnN0IHNldCBvZiB0YXNrcywgcGxlYXNlIHJ1biB0aGUgDQpDb2xhYiBub3RlYm9vayBbaGVyZV0oaHR0cHM6Ly9naXRodWIuY29tL1ZvbmRyYWNla1MvRVNGX1dvcmtzaG9wX0Jlc3RDb2RpbmdQcmFjdGljZXMpLg0KDQoNCiMgMiBDb2RpbmcNCg0KSW4gdGhpcyBwYXJ0LCB5b3UnbGwgZ2V0IGFuIG9wcG9ydHVuaXR5IHRvIHRyeSBzb21lIG9mIHRoZSBjb25jZXB0cyB3ZSd2ZSBjb3ZlcmVkIGR1cmluZyBwcmVzZW50YXRpb24uDQoNCmBgYHtyfQ0KZ2V0d2QoKQ0KYGBgDQoNCiMjIDIuMSBMb2FkaW5nIGRhdGENCg0KSW4gdGhpcyBzZWN0aW9uLCB5b3Ugd2lsbCBiZSBjb21wbGV0ZSB0ZSBmb2xsb3dpbmcgdGFza3M6DQotIGl0ZXJhdGl2ZWx5IHNlYXJjaGluZyB0aHJvdWdoIGEgZGlyZWN0b3J5IGFuZCBzdWJzZXF1ZW50bHkgbG9hZGluZyBkYXRhDQotIHRlc3Rpbmcgb2YgdGhlIGxvYWRlZCBkYXRhDQotIHNlcGFyYXRlIGZ1bmN0aW9uYWxpdGllcyBpbnRvIG9wZXJhdGlvbi1zcGVjaWZpYyBmdW5jdGlvbnMNCg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkJlc3QgQ29kaW5nIFByYWN0aWNlcyINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KZWRpdG9yX29wdGlvbnM6IA0KICBtYXJrZG93bjogDQogICAgd3JhcDogNzINCi0tLQ0KDQoqaGVsZCBhdCB0aGUgRmFjdWx0eSBvZiBFY29ub21pY3Mgb2YgdGhlIE1hc2FyeWsgVW5pdmVyc2l0eSBvbiAxOS4wMy4yMDIzKg0KDQpQbGVhc2UgYmUgaW5mb3JtZWQgSSBkaWRuJ3Qgc29sdmUgc29tZSBpc3N1ZXMgcmVnYXJkaW5nIHRoZSBydW5uaW5nIG9mIGJhc2gNCnNjcmlwdHMgaW4gdGhpcyBSIE5vdGVib29rLiBUbyBjb21wbGV0ZSB0aGUgZmlyc3Qgc2V0IG9mIHRhc2tzLCBwbGVhc2UgcnVuIHRoZSANCkNvbGFiIG5vdGVib29rIFtoZXJlXShodHRwczovL2dpdGh1Yi5jb20vVm9uZHJhY2VrUy9FU0ZfV29ya3Nob3BfQmVzdENvZGluZ1ByYWN0aWNlcykuDQoNCg0KIyBSIENvZGluZyBwYXJ0DQoNCkluIHRoaXMgcGFydCwgeW91J2xsIGdldCBhbiBvcHBvcnR1bml0eSB0byB0cnkgc29tZSBvZiB0aGUgY29uY2VwdHMgd2UndmUgY292ZXJlZCBkdXJpbmcgcHJlc2VudGF0aW9uLg0KDQpgYGB7cn0NCmdldHdkKCkNCmBgYA0KSW4gdGhpcyBzZWN0aW9uLCB5b3Ugd2lsbCBwZXJmb3JtIHRoZSBmb2xsb3dpbmcgdGFza3M6ICANCg0KLSBpdGVyYXRpdmVseSBzZWFyY2ggdGhyb3VnaCBhIGRpcmVjdG9yeSBhbmQgc3Vic2VxdWVudGx5IGxvYWQgdGhlIGRhdGENCi0gdGVzdCBvZiB0aGUgbG9hZGVkIGRhdGENCi0gdXNpbmcgYSBtb2R1bGFyIGRlc2lnbiwgeW91IHdpbGwgc2VwYXJhdGUgZnVuY3Rpb25hbGl0aWVzIGludG8gb3BlcmF0aW9uLXNwZWNpZmljIGZ1bmN0aW9ucw0KDQoNCg0KYGBge3J9DQojIFRPRE86IENyZWF0ZSBhIGZ1bmN0aW9uIHRoYXQ6DQojIC0gbG9hZHMgYWxsIHRoZSAuY3N2IGZpbGVzIGZyb20gdGhlIGRpcmVjdG9yeSANCiMgLSBzdG9yZXMgdGhlbSBpbiBhIGRpY3Rpb25hcnk7DQojIC0gYWRkIHNvbWUgZXhwbGFuYXRvcnkgZG9jc3RyaW5nDQojDQojIGhpbnRzOiBvcy5saXN0ZGlyLCBzdHJpbmcuc3BsaXQsIG1ha2Ugc3VyZSB5b3UgcmVhZCBvbmx5IGNzdiBmaWxlcywgDQojIGJ0dzogaXMgdGhlIGZ1bmN0aW9uIG5hbWUgdGhlIGJlc3QgcG9zc2libGUgb25lPyBjaGFuZ2UgdGhpcyBldmVudHVhbGx5DQoNCnJlYWRfY3N2IDwtIGZ1bmN0aW9uKHBhdGgpew0KICBjc3ZfbGlzdCA9IGxpc3QoKQ0KICByZXR1cm4oTlVMTCkNCn0NCg0KYGBgDQoNClBsZWFzZSBmZWVsIGZyZWUgdG8gdGVzdCB5b3VyIGZ1bmN0aW9uOg0KDQpgYGB7cn0NCnRlc3RfcmVhZF9jc3YgPC0gZnVuY3Rpb24ocGF0aCkgew0KICAjIFRlc3QgZm9yIHRoZSByZWFkLmNzdiBtZXRob2QNCiAgZGljdF9mdWxsIDwtIHJlYWRfY3N2KHBhdGgpDQogIGFzc2VydHRoYXQ6OmFzc2VydF90aGF0KGxlbmd0aChkaWN0X2Z1bGwpID09IGxlbmd0aChsaXN0LmZpbGVzKHBhdGgsIHBhdHRlcm4gPSAiLmNzdiIpKSkNCiAgY2F0KHNwcmludGYoIlRlc3RzIHBhc3NlZCBmb3IgdGhlIHRlc3RfcmVhZF9jc3YoJXMpXG4iLCBwYXRoKSkNCn0NCmBgYA0KDQoNCg0KT0ssIG5vdyB5b3UgaGF2ZSB0aGUgZnVuY3Rpb24uIEhvd2V2ZXIsIHNvbWUgaW1wcm92ZW1lbnRzIGFyZSBzdGlsbCBwb3NzaWJsZS4NClBMZWFzZSBmaW5pc2ggdGhlIGZvbGxvd2luZyB0YXNrczogIA0KDQotIGFkanVzdCB0aGUgZnVjdGlvbiB0byBpZ25vcmUgdGhlICIwIiBwYWRkaW5nIGZvciBhbGwgbnVtYmVycyBzbWFsbGVyIHRoYW4gMTAwIA0KKGUuZy4gIjA1MCIgd2lsbCBiZSByZXBsYWNlZCBieSAiNTAiIGFuZCBzbyBvbikgLT4gcmVhZF9jc3ZfdjIoKQ0KLSBzZXBhcmF0ZSB0aGUgcGFkZGluZyByZW1vdmFsIHRvIGFub3RoZXIgZnVuY3Rpb24gLT4gcmVtb3ZlX3BhZGRpbmcoKQ0KLSB3cml0ZSBhIHRlc3QgZm9yIHRoZSBwYWRkaW5nIHJlbW92YWwNCi0gdXNlIHRoZSByZW1vdmVfcGFkZGluZygpIGZ1bmN0aW9uIHdpdGhpbiB0aGUgcmVhZF9jc3ZfdjMNCi0gZXh0ZW5kIHRoZSBmdW5jdGlvbiB0byBiZSBhYmxlIHRvIHNwZWNpZnkgb25seSBwYXJ0aWN1bGFyIC5jc3YgZmlsZXMgdG8gYmUgcmVhZCAoYW5kIGlmIG5vdCBzcGVjaWZpZWQsIGp1c3QgbG9hZCBhbGwpIC0+IHJlYWRfY3N2X3Y0KCkNCg0KQWdhaW4sIHBsZWFzZSBmaW5kIG1vcmUgc3VpdGFibGUgbmFtZXMgZm9yIGFsbCB0aGUgdmFyaWFibGVzDQoNCg0KYGBge3J9DQojIFRPRE86IGlnbm9yZSB0aGUgcGFkZGluZyB3aXRoaW4gdGhlIGZ1bmN0aW9uDQojIGhpbnQ6IGRpZCB5b3Uga25vdyB0aGF0ICIwMTEiIGludGVnZXIgd2lsbCBiZSByZWFkIGFzICIxMSI/DQoNCnJlYWRfY3N2X3YyIDwtIGZ1bmN0aW9uKHBhdGgpew0KICBjc3ZfbGlzdCA9IGxpc3QoKQ0KICByZXR1cm4oTlVMTCkNCn0NCmBgYA0KDQoNCmBgYHtyfQ0KIyBUT0RPOiBzZXBhcmF0aW5nIHRoZSBwYWRkaW5nIHJlbW92YWwgZnVuY3Rpb24NCg0KcmVtb3ZlX3BhZGRpbmcgPC0gZnVuY3Rpb24odGd0X3N0cil7DQogIHJldHVybihOVUxMKQ0KfQ0KYGBgDQoNCmBgYHtyfQ0KdGVzdF9yZW1vdmVfcGFkZGluZyA8LSBmdW5jdGlvbih0ZXN0X2Nhc2VzPWMoJzAxMjUnLCAnMTI1MCcpKSB7DQogIGFzc2VydHRoYXQ6OmFzc2VydF90aGF0KHJlbW92ZV9wYWRkaW5nKHRlc3RfY2FzZXNbMV0pID09ICcxMjUnKQ0KICBjYXQoc3ByaW50ZigicmVtb3ZlX3BhZGRpbmcoJXMpIC0+ICVzIFRlc3QgT0tcbiIsIHRlc3RfY2FzZXNbMV0sIHJlbW92ZV9wYWRkaW5nKHRlc3RfY2FzZXNbMV0pKSkNCiAgYXNzZXJ0dGhhdDo6YXNzZXJ0X3RoYXQocmVtb3ZlX3BhZGRpbmcodGVzdF9jYXNlc1syXSkgPT0gJzEyNTAnKQ0KICBjYXQoc3ByaW50ZigicmVtb3ZlX3BhZGRpbmcoJXMpIC0+ICVzIFRlc3QgT0tcbiIsIHRlc3RfY2FzZXNbMl0sIHJlbW92ZV9wYWRkaW5nKHRlc3RfY2FzZXNbMl0pKSkNCn0NCmBgYA0KDQoNCg0KYGBge3J9DQojIFRPRE86IGFkanVzdCB0aGUgZm9ybWVyIGZ1bmN0aW9uIHNvIHRoYXQgeW91IHVzZSB0aGUgcGFkZGluZyByZW1vdmFsDQpyZWFkX2Nzdl92MyA8LSBmdW5jdGlvbihwYXRoKXsNCiAgY3N2X2xpc3QgPSBsaXN0KCkNCiAgcmV0dXJuKE5VTEwpDQp9DQpgYGANCg0KDQpgYGB7cn0NCg0KcmVhZF9jc3ZfdjQgPC0gZnVuY3Rpb24ocGF0aCl7DQogIGNzdl9saXN0ID0gbGlzdCgpDQogIHJldHVybihOVUxMKQ0KfQ0KDQpgYGANCg0KSW4gdGhlIGxhc3QgcGFydCwgY3JlYXRlIGEgbmV3IGZ1bmN0aW9uLCBjYWxsZWQgZ2V0X21vbml0b3IoKQ0KVGhpcyBmdW5jdGlvbiB3aWxsIGRvIHRoZSBmb2xsb3dpbmc6ICANCg0KLSBsb2FkIHRoZSBzcGVjaWZpYyBtb25pdG9yaW5nIHN0YXRpb25zDQotIGNvbmNhdGVuYXRlIGFsbCBkYXRhIGZyYW1lcyBmcm9tIHRoZSBkaWN0aW9uYXJ5DQotIGlmIGRyb3BuYSwgdGhlIGZ1bmN0aW9uIHdpbGwgZHJvcCBhbGwgbmEgdmFsdWVzIGZvciBhbGwgbG9hZGVkIHRhYmxlcw0KLSBpZiBwcmludF9zdGF0cywgdGhlIGZ1bmN0aW9uIHdpbGwgcHJpbnQgZGVzY3JpcHRpdmUgc3RhdHMgZm9yIGFsbCB0aGUgZGF0YSBmcmFtZXMNCi0gaWYgcGxvdCwgdGhlIGZ1bmN0aW9uIHdpbGwgcGxvdCBhbGwgdmFyaWFibGVzIGluIGEgc2luZ2xlIHBsb3QgKA0KICBpLmUuIERhdGUgd2lsbCBiZSBvbiB0aGUgeCBheGlzLCBjb25jZW50cmF0aW9uIG9uIHRoZSB5IGF4aXMsIElEIHdpbGwgYmUgaW4gdGhlIHBsb3QgdGl0bGUNCg0KDQpgYGB7cn0NCiMgVE9ETzogZ2V0X21vbml0b3IgZnVuY3Rpb24NCiMgSGludHM6IA0KIyAtc2VwYXJhdGUgZnVuY3Rpb25hbGl0aWVzIChsb2FkaW5nIHRoZSBkYXRhIGFuZCBwbG90dGluZyB0aGUgZGF0YSkNCiMgLXVzZSBhbHJlYWR5IGRlZmluZWQgZnVuY3Rpb24gdGhhdCBsb2FkcyB0aGUgY3N2IGRhdGENCg0KZ2V0X21vbml0b3IgPC0gZnVuY3Rpb24oc3RhdGlvbl9pZHMsIGRyb3BuYT1UUlVFLCBwbG90PVRSVUUpIHsNCiAgc3RhdGlvbnNfZGF0YSA8LSBOVUxMDQogIGlmIChkcm9wbmEpIHtyZXR1cm4oTlVMTCl9DQogIGlmIChwbG90KSB7cmV0dXJuKE5VTEwpfQ0KICByZXR1cm4oc3RhdGlvbnNfZGF0YSkNCn0NCmBgYA0KDQoNCg0K</div>
 
 
 
