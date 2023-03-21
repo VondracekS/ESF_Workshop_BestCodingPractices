@@ -10,18 +10,22 @@ editor_options:
 *held at the Faculty of Economics of the Masaryk University on 19.03.2023*
 
 Please be informed I didn't solve some issues regarding the running of bash
-scripts in this R Notebook. To complete the tasks, please run the Colab notebook
-[here](https://github.com/VondracekS/ESF_Workshop_BestCodingPractices).
-
-```{r, engine = 'bash'}
-pwd
-```
+scripts in this R Notebook. To complete the first set of tasks, please run the 
+Colab notebook [here](https://github.com/VondracekS/ESF_Workshop_BestCodingPractices).
 
 
-```{r, engine = 'bash'}
-ls
+# 2 Coding
+
+In this part, you'll get an opportunity to try some of the concepts we've covered during presentation.
+
+```{r}
+getwd()
 ```
-```{r, engine = 'bash'}
-cd data
-ls
-```
+
+## 2.1 Loading data
+
+In this section, you will be complete te following tasks:
+- iteratively searching through a directory and subsequently loading data
+- testing of the loaded data
+- separate functionalities into operation-specific functions
+

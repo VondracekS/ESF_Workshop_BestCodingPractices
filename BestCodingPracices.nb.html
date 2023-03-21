@@ -1773,36 +1773,31 @@ pre code {
 <p><em>held at the Faculty of Economics of the Masaryk University on
 19.03.2023</em></p>
 <p>Please be informed I didn’t solve some issues regarding the running
-of bash scripts in this R Notebook. To complete the tasks, please run
-the Colab notebook <a href="https://github.com/VondracekS/ESF_Workshop_BestCodingPractices">here</a>.</p>
+of bash scripts in this R Notebook. To complete the first set of tasks,
+please run the Colab notebook <a href="https://github.com/VondracekS/ESF_Workshop_BestCodingPractices">here</a>.</p>
+</div>
+<div id="coding" class="section level1">
+<h1>2 Coding</h1>
+<p>In this part, you’ll get an opportunity to try some of the concepts
+we’ve covered during presentation.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgYmFzaFxucHdkXG5gYGAifQ== -->
-<pre class="bash"><code>pwd</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2V0d2QoKVxuYGBgIn0= -->
+<pre class="r"><code>getwd()</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<div id="loading-data" class="section level2">
+<h2>2.1 Loading data</h2>
+<p>In this section, you will be complete te following tasks: -
+iteratively searching through a directory and subsequently loading data
+- testing of the loaded data - separate functionalities into
+operation-specific functions</p>
 <!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgYmFzaFxubHNcbmBgYCJ9 -->
-<pre class="bash"><code>ls</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiQkNQX1dvcmtzaG9wLnBwdHhcbkJlc3RDb2RpbmdQcmFjaWNlcy5SbWRcbkJlc3RDb2RpbmdQcmFjaWNlcy5uYi5odG1sXG5FU0ZfV29ya3Nob3BfQmVzdENvZGluZ1ByYWN0aWNlcy5ScHJvalxuUkVBRE1FLm1kXG5iZXN0X2NvZGluZ19wcmFjdGljZXMuaXB5bmJcbmRhdGFcbnV0aWxzXG4ifQ== -->
-<pre><code>BCP_Workshop.pptx
-BestCodingPracices.Rmd
-BestCodingPracices.nb.html
-ESF_Workshop_BestCodingPractices.Rproj
-README.md
-best_coding_practices.ipynb
-data
-utils</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-chunk-end -->
+</div>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkJlc3QgQ29kaW5nIFByYWN0aWNlcyINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KZWRpdG9yX29wdGlvbnM6IA0KICBtYXJrZG93bjogDQogICAgd3JhcDogNzINCi0tLQ0KDQojIEJlc3QgQ29kaW5nIFByYWN0aWNlcyBXb3Jrc2hvcA0KKmhlbGQgYXQgdGhlIEZhY3VsdHkgb2YgRWNvbm9taWNzIG9mIHRoZSBNYXNhcnlrIFVuaXZlcnNpdHkgb24gMTkuMDMuMjAyMyoNCg0KUGxlYXNlIGJlIGluZm9ybWVkIEkgZGlkbid0IHNvbHZlIHNvbWUgaXNzdWVzIHJlZ2FyZGluZyB0aGUgcnVubmluZyBvZiBiYXNoDQpzY3JpcHRzIGluIHRoaXMgUiBOb3RlYm9vay4gVG8gY29tcGxldGUgdGhlIHRhc2tzLCBwbGVhc2UgcnVuIHRoZSBDb2xhYiBub3RlYm9vaw0KW2hlcmVdKGh0dHBzOi8vZ2l0aHViLmNvbS9Wb25kcmFjZWtTL0VTRl9Xb3Jrc2hvcF9CZXN0Q29kaW5nUHJhY3RpY2VzKS4NCg0KYGBge3IsIGVuZ2luZSA9ICdiYXNoJ30NCnB3ZA0KYGBgDQoNCg0KYGBge3IsIGVuZ2luZSA9ICdiYXNoJ30NCmxzDQpgYGANCmBgYHtyLCBlbmdpbmUgPSAnYmFzaCd9DQpjZCBkYXRhDQpscw0KYGBgDQo=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkJlc3QgQ29kaW5nIFByYWN0aWNlcyINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KZWRpdG9yX29wdGlvbnM6IA0KICBtYXJrZG93bjogDQogICAgd3JhcDogNzINCi0tLQ0KDQojIEJlc3QgQ29kaW5nIFByYWN0aWNlcyBXb3Jrc2hvcA0KKmhlbGQgYXQgdGhlIEZhY3VsdHkgb2YgRWNvbm9taWNzIG9mIHRoZSBNYXNhcnlrIFVuaXZlcnNpdHkgb24gMTkuMDMuMjAyMyoNCg0KUGxlYXNlIGJlIGluZm9ybWVkIEkgZGlkbid0IHNvbHZlIHNvbWUgaXNzdWVzIHJlZ2FyZGluZyB0aGUgcnVubmluZyBvZiBiYXNoDQpzY3JpcHRzIGluIHRoaXMgUiBOb3RlYm9vay4gVG8gY29tcGxldGUgdGhlIGZpcnN0IHNldCBvZiB0YXNrcywgcGxlYXNlIHJ1biB0aGUgDQpDb2xhYiBub3RlYm9vayBbaGVyZV0oaHR0cHM6Ly9naXRodWIuY29tL1ZvbmRyYWNla1MvRVNGX1dvcmtzaG9wX0Jlc3RDb2RpbmdQcmFjdGljZXMpLg0KDQoNCiMgMiBDb2RpbmcNCg0KSW4gdGhpcyBwYXJ0LCB5b3UnbGwgZ2V0IGFuIG9wcG9ydHVuaXR5IHRvIHRyeSBzb21lIG9mIHRoZSBjb25jZXB0cyB3ZSd2ZSBjb3ZlcmVkIGR1cmluZyBwcmVzZW50YXRpb24uDQoNCmBgYHtyfQ0KZ2V0d2QoKQ0KYGBgDQoNCiMjIDIuMSBMb2FkaW5nIGRhdGENCg0KSW4gdGhpcyBzZWN0aW9uLCB5b3Ugd2lsbCBiZSBjb21wbGV0ZSB0ZSBmb2xsb3dpbmcgdGFza3M6DQotIGl0ZXJhdGl2ZWx5IHNlYXJjaGluZyB0aHJvdWdoIGEgZGlyZWN0b3J5IGFuZCBzdWJzZXF1ZW50bHkgbG9hZGluZyBkYXRhDQotIHRlc3Rpbmcgb2YgdGhlIGxvYWRlZCBkYXRhDQotIHNlcGFyYXRlIGZ1bmN0aW9uYWxpdGllcyBpbnRvIG9wZXJhdGlvbi1zcGVjaWZpYyBmdW5jdGlvbnMNCg0K</div>
 
 
 
